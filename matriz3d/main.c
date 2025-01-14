@@ -29,8 +29,6 @@ int main(){
     //para cada fatia
     for(int fatia = 0; fatia < quantidadeFatia; fatia ++){
 
-        //puts("");
-
         //para cada linha
         for (int linha = 0; linha < quantidadeLinhas; linha ++){
             printf("fatia [%d]\n", fatia);
@@ -43,6 +41,7 @@ int main(){
                     linha, &matriz3d[fatia][linha], linha, matriz3d[fatia][linha]);
             puts("");
 
+            //para cada coluna
             for (int coluna = 0; coluna < quantidadeColunas; coluna ++){
                 matriz3d[fatia][linha][coluna] = incremento++;
                 printf("endereco da coluna [%d] = %p, conteudo da coluna [%d] = %d\n",
@@ -54,6 +53,20 @@ int main(){
         printf("----------------------------------------------------------------");
         puts("");
     }
+
+    //desalocamento
+
+    ////para cada fatia
+    for (int fatia = 0; fatia < quantidadeFatia; fatia ++){
+
+        ////para cada linha
+        for (int linha = 0; linha < quantidadeLinhas; linha ++){
+            free(matriz3d[fatia][linha]);
+        }
+        free(matriz3d[fatia]);
+    }
+    free(matriz3d);
+    matriz3d = NULL;
 
     return 0;
 }
